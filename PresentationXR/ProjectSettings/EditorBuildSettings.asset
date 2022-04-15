@@ -6,8 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Samples/Mixed Reality Toolkit Examples/2.7.3/Experimental - HandMenuLayout/Scenes/HandMenuLayoutExamples.unity
-    guid: 9e1c6bf44fb90c54dbf82acf2808c16f
+    path: Assets/00_My/00 Scenes/TestScene.unity
+    guid: d8562b0e94d6f6048b56ea4634413511
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: e4c9be36946a4d94aaa311b552f6f141, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 55fd984eb64532243b1e6916faa1346d, type: 2}
