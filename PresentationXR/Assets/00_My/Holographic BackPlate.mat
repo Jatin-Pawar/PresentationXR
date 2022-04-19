@@ -79,8 +79,8 @@ Material:
     - _BorderLightOpaqueAlpha: 1
     - _BorderLightReplacesAlbedo: 1
     - _BorderLightUsesHoverColor: 0
-    - _BorderMinValue: 0.6
-    - _BorderWidth: 0.2
+    - _BorderMinValue: 0.816
+    - _BorderWidth: 0.07
     - _BumpScale: 1
     - _ClippingBorder: 0
     - _ClippingBorderWidth: 0.025
@@ -91,7 +91,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DirectionalLight: 0
     - _DstBlend: 0
-    - _EdgeSmoothingValue: 0.0002
+    - _EdgeSmoothingValue: 0
     - _EnableChannelMap: 0
     - _EnableEmission: 0
     - _EnableHoverColorOverride: 0
@@ -114,7 +114,7 @@ Material:
     - _IgnoreZScale: 0
     - _IndependentCorners: 0
     - _InnerGlow: 1
-    - _InnerGlowPower: 2.6
+    - _InnerGlowPower: 2
     - _Iridescence: 1
     - _IridescenceAngle: -0.78
     - _IridescenceIntensity: 0.75
