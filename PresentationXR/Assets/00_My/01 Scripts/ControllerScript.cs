@@ -3,13 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestScript : MonoBehaviour
+public class ControllerScript : MonoBehaviour
 {
     public Animator currentAnimator;
     public AnimationClip animClip;
     AnimatorClipInfo[] m_CurrentClipInfo;
     AnimatorStateInfo currentState;
     public GameObject[] infoPannels;
+    public GameObject[] graphInfoPannels;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +38,7 @@ public class TestScript : MonoBehaviour
         }
     }
 
+    // play animation
     public void Play()
     {
         if (!currentAnimator.GetCurrentAnimatorStateInfo(0).IsName("Play Animation"))
@@ -47,26 +49,18 @@ public class TestScript : MonoBehaviour
         currentState = currentAnimator.GetCurrentAnimatorStateInfo(0);
     }
 
+    // pause animation
     public void PauseIt()
     {
         currentAnimator.speed = 0;
 
     }
 
-    public void PauseAnim()
+    // pause animation for specified seconds
+    public void Pause()
     {
         //currentAnimator.speed = 0;
         StartCoroutine(PauseAnimation());
-    }
-
-    public void ShowInfoPannel(int pannelId)
-    {
-        infoPannels[pannelId].transform.DOScale(new Vector3(0.5f, 0.5f, 0.5f), 0.70f);
-    }
-
-    public void HideInfoPannel(int pannelId)
-    {
-        infoPannels[pannelId].transform.DOScale(Vector3.zero, 0.35f);
     }
 
     IEnumerator PauseAnimation()
@@ -75,4 +69,27 @@ public class TestScript : MonoBehaviour
         yield return new WaitForSeconds(3);
         Play();
     }
+
+    // show UI pannel in animated way
+    public void ShowInfoPannel(int pannelId)
+    {
+        infoPannels[pannelId].transform.DOScale(new Vector3(0.5f, 0.5f, 0.5f), 0.70f);
+    }
+
+    // hide UI pannel in animated way
+    public void HideInfoPannel(int pannelId)
+    {
+        infoPannels[pannelId].transform.DOScale(Vector3.zero, 0.35f);
+    }
+
+    // setting all the block based UI to hide
+    public void HideGraphInfoPannel()
+    {
+        foreach (GameObject gameObject in graphInfoPannels)
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
+    
 }
