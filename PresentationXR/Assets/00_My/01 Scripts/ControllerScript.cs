@@ -5,12 +5,17 @@ using UnityEngine;
 
 public class ControllerScript : MonoBehaviour
 {
+    public GameObject animationGameObj;
+    public GameObject ThannkYouPannel;
     public Animator currentAnimator;
     public AnimationClip animClip;
     AnimatorClipInfo[] m_CurrentClipInfo;
     AnimatorStateInfo currentState;
     public GameObject[] infoPannels;
     public GameObject[] graphInfoPannels;
+    public GameObject startingInfoPannel;
+    public bool isPausedGlobally = false;
+    public AudioSource backgroundAudio;
 
     // Start is called before the first frame update
     void Start()
@@ -18,56 +23,68 @@ public class ControllerScript : MonoBehaviour
         currentState = currentAnimator.GetCurrentAnimatorStateInfo(0);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (currentAnimator.GetCurrentAnimatorStateInfo(0).IsName("Play Animation"))
+        //testing
+        if (Input.GetKeyDown(KeyCode.O))
         {
-            m_CurrentClipInfo = currentAnimator.GetCurrentAnimatorClipInfo(0);
-            currentState = currentAnimator.GetCurrentAnimatorStateInfo(0);
+            PauseIt();
         }
 
-
-        if (Input.GetKeyUp(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             Play();
         }
-        if (Input.GetKey(KeyCode.O))
-        {
-            PauseAnimation();
-        }
     }
+
+
 
     // play animation
     public void Play()
     {
+
+        if (startingInfoPannel.activeSelf)
+        {
+            startingInfoPannel.SetActive(false);
+        }
+
         if (!currentAnimator.GetCurrentAnimatorStateInfo(0).IsName("Play Animation"))
         {
             currentAnimator.Play("Play Animation");
         }
         currentAnimator.speed = 1;
         currentState = currentAnimator.GetCurrentAnimatorStateInfo(0);
+        isPausedGlobally = false;
+        if (!backgroundAudio.isPlaying)
+        {
+            backgroundAudio.Play();
+        }
+        
     }
 
     // pause animation
     public void PauseIt()
     {
         currentAnimator.speed = 0;
-
+        isPausedGlobally = true;
+        backgroundAudio.Pause();
     }
 
     // pause animation for specified seconds
-    public void Pause()
+    public void Pause(float pauseTime)
     {
-        //currentAnimator.speed = 0;
-        StartCoroutine(PauseAnimation());
+        StartCoroutine(PauseAnimation(pauseTime));
     }
 
-    IEnumerator PauseAnimation()
+    IEnumerator PauseAnimation(float pauseTime)
     {
         currentAnimator.speed = 0;
-        yield return new WaitForSeconds(3);
-        Play();
+        yield return new WaitForSeconds(pauseTime);
+        if (!isPausedGlobally)
+        {
+            Play();
+        }
+        
     }
 
     // show UI pannel in animated way
@@ -89,6 +106,12 @@ public class ControllerScript : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
+    }
+
+    public void EndPresentation()
+    {
+        animationGameObj.transform.DOScale(Vector3.zero, 1f);
+        ThannkYouPannel.transform.DOScale(Vector3.one, 0.5f);
     }
 
     
